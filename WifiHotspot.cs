@@ -29,13 +29,13 @@ namespace WifiHotspotDotnet
             }
         }
 
-        public int ClientsConnected
+        public NetworkInfo Info
         {
             get
             {
-                var s = WriteAndReadProcessData("netsh wlan show hostednetwork");
-                Console.Write(s);
-                return 0;
+                List<String> response = WriteAndReadProcessData("netsh wlan show hostednetwork");
+
+                return new NetworkInfo(response);
             }
         }
 
@@ -91,7 +91,6 @@ namespace WifiHotspotDotnet
         public void Initialize()
         {
             WriteAndReadProcessData(String.Format("netsh wlan set hostednetwork mode=allow ssid=\"{0}\" key=\"{1}\" ", this.SSID, this.Passphrase));
-
         }
 
         public void Start()

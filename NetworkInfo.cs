@@ -6,9 +6,58 @@ using System.Threading.Tasks;
 
 namespace WifiHotspotDotnet
 {
-    class NetworkInfo
+    public class NetworkInfo
     {
-        String Mode { get; set; }
-        String SSID { get; set; }
+        private List<String> Data;
+
+        public String Mode { get; }
+        public String SSID { get; }
+        public String Authentication { get; }
+        public String Cipher { get; }
+        public String BSSID { get; }
+        public String RadioType { get; }
+
+        public int MaxClients { get; }
+        public int Channel { get; }
+        public int NumberClients { get; }
+
+        public NetworkInfo(List<String> data)
+        {
+            this.Data = data;
+
+            this.Mode = GetDataValue("Mode");
+            this.SSID = GetDataValue("SSID name", true);
+            this.Authentication = GetDataValue("Authentication");
+            this.Cipher = GetDataValue("Cipher");
+            this.BSSID = GetDataValue("BSSID");
+            this.RadioType = GetDataValue("Radio type");
+
+            this.MaxClients = Convert.ToInt32(GetDataValue("Max number of clients"));
+            this.Channel = Convert.ToInt32(GetDataValue("Channel"));
+            this.NumberClients = Convert.ToInt32(GetDataValue("Number of clients"));
+        }
+
+        private string GetDataValue(String name, bool removeQuotes = false)
+        {
+            foreach (String s in Data)
+            {
+                if (s.StartsWith("    " + name))
+                {
+                    int startIndex = s.IndexOf(":") + 1;
+
+                    string value = s.Substring(startIndex, s.Length - startIndex);
+
+                    if (removeQuotes)
+                    {
+                        value = value.Remove(0, 2);
+                        value = value.Remove(value.Length - 1, 1);
+                    }
+
+                    return value;
+                }
+            }
+
+            throw new KeyNotFoundException();
+        }
     }
 }
