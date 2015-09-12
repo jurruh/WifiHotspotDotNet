@@ -32,9 +32,23 @@ namespace WifiHotspotDotnet
             this.BSSID = GetDataValue("BSSID");
             this.RadioType = GetDataValue("Radio type");
 
-            this.MaxClients = Convert.ToInt32(GetDataValue("Max number of clients"));
-            this.Channel = Convert.ToInt32(GetDataValue("Channel"));
-            this.NumberClients = Convert.ToInt32(GetDataValue("Number of clients"));
+            try
+            {
+                this.MaxClients = Convert.ToInt32(GetDataValue("Max number of clients"));
+            }
+            catch (FormatException) { }
+
+            try
+            {
+                this.Channel = Convert.ToInt32(GetDataValue("Channel"));
+            }
+            catch (FormatException) { }
+
+            try
+            {
+                this.NumberClients = Convert.ToInt32(GetDataValue("Number of clients"));
+            }
+            catch (FormatException) { }
         }
 
         private string GetDataValue(String name, bool removeQuotes = false)
@@ -57,7 +71,9 @@ namespace WifiHotspotDotnet
                 }
             }
 
-            throw new KeyNotFoundException();
+            return "";
+
+            //throw new KeyNotFoundException();
         }
     }
 }

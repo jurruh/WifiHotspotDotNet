@@ -43,7 +43,6 @@ namespace WifiHotspotDotnet
         {
             this.SSID = ssid;
             this.Passphrase = passphrase;
-            Initialize();
         }
 
         private Process GetDefaultCMDProcess()
@@ -90,17 +89,39 @@ namespace WifiHotspotDotnet
 
         public void Initialize()
         {
-            WriteAndReadProcessData(String.Format("netsh wlan set hostednetwork mode=allow ssid=\"{0}\" key=\"{1}\" ", this.SSID, this.Passphrase));
+            List<String> response = WriteAndReadProcessData(String.Format("netsh wlan set hostednetwork mode=allow ssid=\"{0}\" key=\"{1}\" ", this.SSID, this.Passphrase));
+
+            if (response[0] != "The hosted network mode has been set to allow. ")
+            {
+
+            }
+
+            if (response[1] != "The SSID of the hosted network has been successfully changed. ")
+            {
+
+            }
         }
 
         public void Start()
         {
-            WriteAndReadProcessData("netsh wlan start hosted network");
+            Initialize();
+
+            List<String> response = WriteAndReadProcessData("netsh wlan start hosted network");
+
+            if (response[0] != "The hosted network started. ")
+            {
+                throw new HostedNetworkNotStartedException();
+            }
         }
 
         public void Stop()
         {
-            WriteAndReadProcessData("netsh wlan stop hosted network");
+            List<String> response = WriteAndReadProcessData("netsh wlan stop hosted network");
+
+            if (response[0] != "The hosted network stopped. ")
+            {
+                throw new HostedNetworkNotStoppedException();
+            }
         }
     }
 }

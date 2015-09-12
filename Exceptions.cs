@@ -8,10 +8,35 @@ namespace WifiHotspotDotnet
 {
     class PassphraseLengthException : Exception
     {
-        
+
     }
 
     class SSIDLengthException : Exception
+    {
+
+    }
+
+    class HostedNetworkNotStartedException : Exception
+    {
+
+    }
+
+    class HostedNetworkNotStoppedException : Exception
+    {
+
+    }
+
+    class HostedNetworkModeNotSetException : Exception
+    {
+
+    }
+
+    class HostedNetworkSSIDNotSetException : Exception
+    {
+
+    }
+
+    class HostedNetworkPassphraseNotSetException : Exception
     {
 
     }
