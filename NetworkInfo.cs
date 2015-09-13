@@ -72,8 +72,6 @@ namespace WifiHotspotDotnet
             }
 
             return "";
-
-            //throw new KeyNotFoundException();
         }
     }
 }

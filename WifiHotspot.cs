@@ -93,12 +93,17 @@ namespace WifiHotspotDotnet
 
             if (response[0] != "The hosted network mode has been set to allow. ")
             {
-
+                throw new HostedNetworkModeNotSetException();
             }
 
             if (response[1] != "The SSID of the hosted network has been successfully changed. ")
             {
+                throw new HostedNetworkSSIDNotSetException();
+            }
 
+            if (response[2] != "The user key passphrase of the hosted network has been successfully changed. ")
+            {
+                throw new HostedNetworkPassphraseNotSetException();
             }
         }
 
