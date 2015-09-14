@@ -29,7 +29,7 @@ namespace WifiHotspotDotnet
             }
         }
 
-        public NetworkInfo Info
+        public static NetworkInfo Info
         {
             get
             {
@@ -45,7 +45,7 @@ namespace WifiHotspotDotnet
             this.Passphrase = passphrase;
         }
 
-        private Process GetDefaultCMDProcess()
+        private static Process GetDefaultCMDProcess()
         {
             ProcessStartInfo startInfo = new ProcessStartInfo("cmd")
             {
@@ -63,7 +63,7 @@ namespace WifiHotspotDotnet
             return process;
         }
 
-        private List<String> WriteAndReadProcessData(String command)
+        private static List<String> WriteAndReadProcessData(String command)
         {
             Process process = GetDefaultCMDProcess();
 
@@ -82,7 +82,7 @@ namespace WifiHotspotDotnet
             return commandData;
         }
 
-        private List<String> MultipleLinesToStringList(String text)
+        private static List<String> MultipleLinesToStringList(String text)
         {
             return new List<string>(text.Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries));
         }
