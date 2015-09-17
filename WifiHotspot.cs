@@ -39,6 +39,11 @@ namespace WifiHotspotDotNet
             }
         }
 
+        public WifiHotspot()
+        {
+
+        }
+
         public WifiHotspot(String ssid, string passphrase)
         {
             this.SSID = ssid;
