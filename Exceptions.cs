@@ -6,32 +6,32 @@ using System.Threading.Tasks;
 
 namespace WifiHotspotDotNet
 {
-    class PassphraseLengthException : Exception
+    public class PassphraseLengthException : Exception
     {
 
     }
 
-    class SSIDLengthException : Exception
+    public class SSIDLengthException : Exception
     {
 
     }
 
-    class HostedNetworkNotStartedException : Exception
+    public class HostedNetworkNotStartedException : Exception
     {
 
     }
 
-    class HostedNetworkNotStoppedException : Exception
+    public class HostedNetworkNotStoppedException : Exception
     {
 
     }
 
-    class HostedNetworkModeNotSetException : Exception
+    public class HostedNetworkModeNotSetException : Exception
     {
 
     }
 
-    class HostedNetworkSSIDNotSetException : Exception
+    public class HostedNetworkSSIDNotSetException : Exception
     {
 
     }
