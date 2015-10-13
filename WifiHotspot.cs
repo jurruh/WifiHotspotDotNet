@@ -29,6 +29,22 @@ namespace WifiHotspotDotNet
             }
         }
 
+        public bool TurnedOn
+        {
+            get
+            {
+                if (Info.Channel != 0)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+
         public static NetworkInfo Info
         {
             get
